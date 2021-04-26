@@ -1,0 +1,28 @@
+{
+  "files": {
+    "main.css": "/TI-testApp/static/css/main.e3d53120.chunk.css",
+    "main.js": "/TI-testApp/static/js/main.2ee3f830.chunk.js",
+    "main.js.map": "/TI-testApp/static/js/main.2ee3f830.chunk.js.map",
+    "runtime-main.js": "/TI-testApp/static/js/runtime-main.b52e944c.js",
+    "runtime-main.js.map": "/TI-testApp/static/js/runtime-main.b52e944c.js.map",
+    "static/css/2.e4574398.chunk.css": "/TI-testApp/static/css/2.e4574398.chunk.css",
+    "static/js/2.7874587a.chunk.js": "/TI-testApp/static/js/2.7874587a.chunk.js",
+    "static/js/2.7874587a.chunk.js.map": "/TI-testApp/static/js/2.7874587a.chunk.js.map",
+    "index.html": "/TI-testApp/index.html",
+    "static/css/2.e4574398.chunk.css.map": "/TI-testApp/static/css/2.e4574398.chunk.css.map",
+    "static/css/main.e3d53120.chunk.css.map": "/TI-testApp/static/css/main.e3d53120.chunk.css.map",
+    "static/js/2.7874587a.chunk.js.LICENSE.txt": "/TI-testApp/static/js/2.7874587a.chunk.js.LICENSE.txt",
+    "static/media/styles.scss": "/TI-testApp/static/media/background.656da130.jpg",
+    "static/media/button-sound.8277ab8c.mp3": "/TI-testApp/static/media/button-sound.8277ab8c.mp3",
+    "static/media/correct-answer.e1cf8406.mp3": "/TI-testApp/static/media/correct-answer.e1cf8406.mp3",
+    "static/media/materialdesignicons.min.css": "/TI-testApp/static/media/materialdesignicons-webfont.e9db4005.woff2",
+    "static/media/wrong-answer.e08b616b.mp3": "/TI-testApp/static/media/wrong-answer.e08b616b.mp3"
+  },
+  "entrypoints": [
+    "static/js/runtime-main.b52e944c.js",
+    "static/css/2.e4574398.chunk.css",
+    "static/js/2.7874587a.chunk.js",
+    "static/css/main.e3d53120.chunk.css",
+    "static/js/main.2ee3f830.chunk.js"
+  ]
+}
