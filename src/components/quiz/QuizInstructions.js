@@ -15,7 +15,18 @@ const QuizInstructions = () => (
           elapses.
         </li>
         <li>Each test consists of 15 questions.</li>
-        <li>Every question contains 4 options</li>
+        <li>Every question contains 4 options.</li>
+        <li>Only one option is correct out of four. </li>
+        <li>No marks are assigned for wrong and skipped questions. </li>
+        <li>
+          At the right top 5 hints are present. Use them by just clicking at the
+          icon
+        </li>
+        <li>
+          At the left top 2 fifty-fifty options are present. Use them by just
+          clicking at the icon
+        </li>
+        <li className='good-luck'>Good luck !!</li>
       </ul>
       <div>
         <span className='left'>

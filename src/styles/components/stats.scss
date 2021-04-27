@@ -1,0 +1,38 @@
+#stats {
+  div.success-icon {
+    color: $green;
+    font-size: 10rem;
+    text-align: center;
+  }
+  h1 {
+    color: $green;
+    text-align: center;
+
+    margin-top: 0% !important;
+  }
+  div.container {
+    background-color: $off-white;
+    padding: 20px;
+  }
+  h2 {
+    color: $blue;
+    text-align: center;
+  }
+  h4 {
+    text-align: center;
+  }
+  ul {
+    display: flex;
+
+    justify-content: center;
+  }
+  li {
+    margin: 20px;
+    padding: 10px;
+    background-color: darken($off-white, 15%);
+    transition: 500ms;
+  }
+  li:hover {
+    background-color: darken($off-white, 25%);
+  }
+}

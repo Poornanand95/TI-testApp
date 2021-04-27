@@ -27,13 +27,16 @@ class Play extends Component {
       wrongAnswers: 0,
       hints: 5,
       fiftyfifty: 2,
-      usedFiftyfifty: false,
+      usedfiftyfifty: false,
       nextButtonDisabled: false,
       previousButtonDisabled: true,
       previousRandomNumbers: [],
       time: {},
     };
     this.interval = null;
+    this.correctSound = React.createRef();
+    this.wrongSound = React.createRef();
+    this.buttonSound = React.createRef();
   }
 
   componentDidMount() {
@@ -51,6 +54,11 @@ class Play extends Component {
     );
     this.startTimer();
   }
+
+  componentWillUnmount() {
+    clearInterval(this.interval);
+  }
+
   displayQuestions = (
     questions = this.state.questions,
     currentQuestion,
@@ -84,12 +92,12 @@ class Play extends Component {
   handleOptionClick = (e) => {
     if (e.target.innerHTML.toLowerCase() === this.state.answer.toLowerCase()) {
       setTimeout(() => {
-        document.getElementById('correct-sound').play();
+        this.correctSound.current.play();
       }, 500);
       this.correctAnswer();
     } else {
       setTimeout(() => {
-        document.getElementById('wrong-sound').play();
+        this.wrongSound.current.play();
       }, 500);
       this.wrongAnswer();
     }
@@ -157,7 +165,7 @@ class Play extends Component {
   };
 
   playButtonSound = () => {
-    document.getElementById('button-sound').play();
+    this.buttonSound.current.play();
   };
 
   correctAnswer = () => {
@@ -174,12 +182,16 @@ class Play extends Component {
         numberOfAnsweredQuestion: prevState.numberOfAnsweredQuestion + 1,
       }),
       () => {
-        this.displayQuestions(
-          this.state.questions,
-          this.state.currentQuestion,
-          this.state.nextQuestion,
-          this.state.previousQuestion
-        );
+        if (this.state.nextQuestion === undefined) {
+          this.endGame();
+        } else {
+          this.displayQuestions(
+            this.state.questions,
+            this.state.currentQuestion,
+            this.state.nextQuestion,
+            this.state.previousQuestion
+          );
+        }
       }
     );
   };
@@ -197,12 +209,16 @@ class Play extends Component {
         numberOfAnsweredQuestion: prevState.numberOfAnsweredQuestion + 1,
       }),
       () => {
-        this.displayQuestions(
-          this.state.questions,
-          this.state.currentQuestion,
-          this.state.nextQuestion,
-          this.state.previousQuestion
-        );
+        if (this.state.nextQuestion === undefined) {
+          this.endGame();
+        } else {
+          this.displayQuestions(
+            this.state.questions,
+            this.state.currentQuestion,
+            this.state.nextQuestion,
+            this.state.previousQuestion
+          );
+        }
       }
     );
   };
@@ -214,7 +230,7 @@ class Play extends Component {
       option.style.visibility = 'visible';
     });
     this.setState({
-      usedFiftyfifty: false,
+      usedfiftyfifty: false,
     });
   };
 
@@ -256,7 +272,7 @@ class Play extends Component {
   };
 
   handleFiftyFifty = () => {
-    if (this.state.fiftyfifty > 0 && this.state.usedFiftyfifty === false) {
+    if (this.state.fiftyfifty > 0 && this.state.usedfiftyfifty === false) {
       const options = document.querySelectorAll('.option');
       const randomNumbers = [];
       let indexOfAnswer;
@@ -302,7 +318,7 @@ class Play extends Component {
       });
       this.setState((prevState) => ({
         fiftyfifty: prevState.fiftyfifty - 1,
-        usedFiftyfifty: true,
+        usedfiftyfifty: true,
       }));
     }
   };
@@ -326,8 +342,7 @@ class Play extends Component {
             },
           },
           () => {
-            alert('Test has ended');
-            this.props.history.push('/');
+            this.endGame();
           }
         );
       } else {
@@ -367,6 +382,25 @@ class Play extends Component {
       });
     }
   };
+
+  endGame = () => {
+    alert('Test has ended!');
+    const { state } = this;
+    const playerStats = {
+      score: state.score,
+      numberOfQuestions: state.numberOfQuestions,
+      numberOfAnsweredQuestion:
+        this.state.correctAnswers + this.state.wrongAnswers,
+      correctAnswers: state.correctAnswers,
+      wrongAnswers: state.wrongAnswers,
+      fiftyfiftyUsed: 2 - state.fiftyfifty,
+      hintUsed: 5 - state.hints,
+    };
+    console.log(playerStats);
+    setTimeout(() => {
+      this.props.history.push('/play/quizSummary', playerStats);
+    }, 1000);
+  };
   render() {
     const {
       currentQuestion,
@@ -377,16 +411,15 @@ class Play extends Component {
       time,
     } = this.state;
 
-    console.log(questions);
     return (
       <Fragment>
         <Helmet>
           <title>Test Pages</title>
         </Helmet>
         <Fragment>
-          <audio id='correct-sound' src={correctNotification}></audio>
-          <audio id='wrong-sound' src={wrongNotification}></audio>
-          <audio id='button-sound' src={buttonSound}></audio>
+          <audio ref={this.correctSound} src={correctNotification}></audio>
+          <audio ref={this.wrongSound} src={wrongNotification}></audio>
+          <audio ref={this.buttonSound} src={buttonSound}></audio>
         </Fragment>
         <div className='questions'>
           <div class='branding'>
